@@ -38,6 +38,14 @@ def delete_note(notes, note_no):
     del notes[note_no]
     save_notes(notes)
 
+def update_note(notes, note_no):
+    note = notes[note_no]
+    new_title = input("Enter new Title ")
+    new_content = input("Enter new Content ")
+    note["title"] = new_title
+    note["content"] = new_content
+    save_notes(notes)
+
 def show_menu():
     print("""====================
        NEXUS
@@ -46,14 +54,15 @@ def show_menu():
 2. List notes
 3. View notes
 4. Delete note
-5. Exit
+5. Update note
+6. Exit
 ====================""")
 
 notes = load_notes()
 while(True):
     show_menu()
     choice = input()
-    if choice == "5":
+    if choice == "6":
         print("good bye")
         break
     elif choice == "2":
@@ -77,6 +86,16 @@ while(True):
                 delete_note(notes, note_no)
             else:
                 print("Notes not found")
+        except ValueError:
+            print("Enter a valid note no")
+
+    elif choice == "5":
+        try:
+            note_no = int(input("Enter note number ")) - 1
+            if 0 <= note_no < len(notes):
+                update_note(notes, note_no)
+            else:
+                print("Note not found")
         except ValueError:
             print("Enter a valid note no")
 
