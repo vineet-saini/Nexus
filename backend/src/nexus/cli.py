@@ -49,6 +49,7 @@ def main():
                 note_no = int(input("Enter note number ")) - 1
                 if 0 <= note_no < len(notes):
                     delete_note(notes, note_no)
+                    save_notes(notes)
                 else:
                     print("Notes not found")
             except ValueError:
@@ -58,14 +59,19 @@ def main():
             try:
                 note_no = int(input("Enter note number ")) - 1
                 if 0 <= note_no < len(notes):
-                    update_note(notes, note_no)
+                    new_title = input("Enter new Title ")
+                    new_content = input("Enter new Content ")
+                    update_note(notes, note_no, new_title, new_content)
+                    save_notes(notes)
                 else:
                     print("Note not found")
             except ValueError:
                 print("Enter a valid note no")
 
         elif choice == "1":
-            note = create_note()
+            title = input("Title: ")
+            content = input("Content: ")
+            note = create_note(title, content)
             notes.append(note)
             save_notes(notes)
         else:
