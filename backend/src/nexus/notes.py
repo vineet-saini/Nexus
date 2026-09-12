@@ -7,8 +7,11 @@ def create_note(title, content):
 
 
 def list_notes(notes):
-    for i, item in enumerate(notes, start=1):
-        print(i, item["title"])
+    return notes
+
+def view_notes(notes, notes_no):
+    note = notes[notes_no]
+    return note
 
 def delete_note(notes, note_no):
     del notes[note_no]
