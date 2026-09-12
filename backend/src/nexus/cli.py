@@ -1,19 +1,5 @@
-import json
-
-
-def create_note():
-    title = input("Title: ")
-    content = input("Content: ")
-    note = {
-        "title": title,
-        "content": content,
-    }
-    return note
-
-
-def list_notes(notes):
-    for i, item in enumerate(notes, start=1):
-        print(i, item["title"])
+from .notes import create_note, list_notes, update_note, delete_note
+from .persistence import save_notes, load_notes
 
 
 def view_notes(notes, notes_no):
@@ -21,37 +7,6 @@ def view_notes(notes, notes_no):
     print("Title:", note["title"])
     print("Content: ", note["content"])
 
-
-def save_notes(notes):
-    try:
-        with open("notes.json", "w") as file:
-            json.dump(notes, file)
-    except FileNotFoundError:
-        print("File not found")
-
-
-def load_notes():
-    try:
-        with open("notes.json", "r") as file:
-            notes = json.load(file)
-        return notes
-    except FileNotFoundError:
-        print("File not found")
-        return []
-
-
-def delete_note(notes, note_no):
-    del notes[note_no]
-    save_notes(notes)
-
-
-def update_note(notes, note_no):
-    note = notes[note_no]
-    new_title = input("Enter new Title ")
-    new_content = input("Enter new Content ")
-    note["title"] = new_title
-    note["content"] = new_content
-    save_notes(notes)
 
 
 def show_menu():
